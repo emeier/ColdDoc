@@ -61,8 +61,7 @@
 	<cfargument name="inputSource" hint="an array of structs containing inputDir and inputMapping" type="array" required="yes"> <!--- of struct --->
 
 	<cfscript>
-		var qFiles = 0;
-		var currentPath = 0;
+		var qFile = 0;
 		var qMetaData = QueryNew("package,name,extends,metadata,type,implements,fullextends");
 		var cfcPath = 0;
 		var packagePath = 0;
@@ -110,9 +109,9 @@
 	                }
 
 					QueryAddRow(qMetaData);
-					QuerySetCell(qMetaData, "package", packagePath);
-					QuerySetCell(qMetaData, "name", cfcName);
-					QuerySetCell(qMetaData, "metadata", meta);
+	                QuerySetCell(qMetaData, "package", packagePath);
+	                QuerySetCell(qMetaData, "name", cfcName);
+	                QuerySetCell(qMetaData, "metadata", meta);
 					QuerySetCell(qMetaData, "type", meta.type);
 
 					implements = getImplements(meta);
@@ -203,7 +202,6 @@
 <cffunction name="getInheritence" hint="gets an array of the classes that this metadata extends, in order of extension" access="private" returntype="array" output="false">
 	<cfargument name="metadata" hint="the metadata to look at" type="struct" required="Yes">
 	<cfscript>
-		{
 			var localmeta = arguments.metadata;
 			//ignore top level
 			var inheritence = [];
@@ -224,7 +222,6 @@
 			}
 
 			return inheritence;
-		}
 	</cfscript>
 </cffunction>
 
